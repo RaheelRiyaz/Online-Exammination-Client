@@ -1,0 +1,41 @@
+@if(showSpinner){
+<app-spinner></app-spinner>
+} @else {
+
+<button class="btn btn-success" (click)="addNewsemester()">
+  Add Semester +
+</button>
+<table class="table mt-5">
+  <thead>
+    <tr>
+      <th scope="col">Semester</th>
+      <th scope="col">Created Date</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (sem of semesters; track $index) {
+    <tr>
+      <td>
+        <input #input type="text" class="input" value="{{ sem.sem }}" />
+      </td>
+      <td>{{ sem.ceatedOn | date }}</td>
+      <td>
+        <button
+          class="btn btn-sm btn-success"
+          (click)="updateSemester(sem.id, input.value)"
+        >
+          Update
+        </button>
+      </td>
+      <td>
+        <button class="btn btn-danger btn-sm" (click)="deleteSemester(sem.id)">
+          Delete
+        </button>
+      </td>
+    </tr>
+    }
+  </tbody>
+</table>
+}

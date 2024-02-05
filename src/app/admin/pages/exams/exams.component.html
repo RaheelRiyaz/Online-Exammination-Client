@@ -1,0 +1,80 @@
+@if(showSpinner){
+<app-spinner></app-spinner>
+} @else { 
+  @for (exam of exams; track $index) 
+  {
+<div class="container mt-5 p-2 d-flex flex-wrap">
+  <div
+    class="card shadow p-3 mb-5 bg-body-tertiary rounded"
+    style="width: 100%"
+  >
+    <div class="card-body">
+      <div class="job">
+        <h4>Exam Name: {{ exam.name }}</h4>
+        <h6 class="text-body-secondary mt-2">
+          Paper Title: {{ exam.description }}
+        </h6>
+        <h6 class="text-body-secondary mb-4">Batch: {{ exam.batch }}</h6>
+        <h6 class="text-body-secondary mb-4">Semester: {{ exam.semester }}</h6>
+
+        Program Name: {{ exam.programName }} <br />
+        Subject Name:
+        {{ exam.subjectName }} <br />
+        Start Date:
+        {{ exam.startDate | date }} <br />
+        End Date:
+        {{ exam.endDate | date }} <br />
+
+        <table class="table mt-3">
+          <thead>
+            <tr>
+              <th scope="col">Exam Date</th>
+              <th scope="col">Status</th>
+              <th scope="col">Total Marks</th>
+              <th scope="col">Passing Marks</th>
+              <th scope="col">Exam Duration</th>
+              <th scope="col">Total Questions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{ exam.startDate | date }}</td>
+              <td>{{ exam.isConducted ? "Conducted" : "Notconducted" }}</td>
+              <td>{{ exam.examTotalMarks }}</td>
+              <td>{{ exam.examPassMarks }}</td>
+              <td>{{ exam.examDuration }}</td>
+              <td>{{ exam.totalNoOfQuestions }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <button
+          class="btn btn-success"
+          routerLink="addquestion/{{ exam.id }}"
+          [disabled]="exam.isConducted"
+        >
+          Add Questions
+        </button>
+
+        <button class="btn btn-info ms-3" routerLink="paper/{{ exam.id }}">
+          View Paper
+        </button>
+
+        <button
+          class="btn btn-dark ms-3"
+          [disabled]="exam.isConducted"
+          (click)="conductExam(exam.id)"
+        >
+          Conduct
+        </button>
+
+        <button
+          class="btn btn-outline-secondary ms-3"
+          (click)="uploadResult(exam.id)"
+        >
+          Upload Result
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+} }

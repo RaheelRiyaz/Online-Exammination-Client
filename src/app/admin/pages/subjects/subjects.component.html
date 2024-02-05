@@ -1,0 +1,41 @@
+@if(showSpinner){
+<app-spinner></app-spinner>
+} @else {
+<button class="btn btn-success" (click)="addNewSubject()">Add Subject +</button>
+<table class="table mt-5">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Created Date</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (subject of subjects; track $index) {
+    <tr>
+      <td>
+        <input #input type="text" class="input" value="{{ subject.name }}" />
+      </td>
+      <td>{{ subject.ceatedOn | date }}</td>
+      <td>
+        <button
+          class="btn btn-sm btn-success"
+          (click)="updateSubject(subject.id, input.value)"
+        >
+          Update
+        </button>
+      </td>
+      <td>
+        <button
+          class="btn btn-danger btn-sm"
+          (click)="deleteSubject(subject.id)"
+        >
+          Delete
+        </button>
+      </td>
+    </tr>
+    }
+  </tbody>
+</table>
+}

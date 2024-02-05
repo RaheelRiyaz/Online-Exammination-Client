@@ -1,0 +1,47 @@
+<div id="wrapper" class="wrapper-content">
+    <div id="sidebar-wrapper">
+      <app-profile-photo class="profile-picture" (click)="uploadProfilePicture()"
+        [src]="baseImagePath + userInfo.filePath"
+      ></app-profile-photo>
+      <ul class="sidebar-nav">
+        <li class="sidebar-brand">
+          <a>
+            {{ userInfo.name | titlecase }}
+          </a>
+        </li>
+        <li>
+          <a routerLink="/admin">Dashboard</a>
+        </li>
+        <li>
+          <a routerLink="/student/exams">Exams</a>
+        </li>
+        <li>
+          <a routerLink="/student/result">Result</a>
+        </li>
+        <li>
+          <a routerLink="/admin/semesters">Semesters</a>
+        </li>
+        <li>
+          <a routerLink="/admin/programs">Programs</a>
+        </li>
+        <li>
+          <a routerLink="/admin/notifications">Notifications</a>
+        </li>
+  
+        <li>
+          <a class="pointer" (click)="service.logout()">Logout</a>
+        </li>
+      </ul>
+    </div>
+  
+    <div id="page-content-wrapper">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12">
+            <router-outlet></router-outlet>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

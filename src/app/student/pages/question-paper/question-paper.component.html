@@ -1,0 +1,78 @@
+<header class="d-flex justify-content-center align-items-center flex-column">
+  <h2 class="">{{ questionpaper.subjectName }}</h2>
+  <p>({{ questionpaper.paperTitle }})</p>
+  <div class="d-flex justify-content-evenly m-auto" style="width: 114%">
+    <h5 class="card-subtitle text-body-secondary">
+      Sem : {{ questionpaper.semester }}
+    </h5>
+    <h5 class="card-subtitle text-body-secondary">
+      Time : {{ questionpaper.examDuration }} Minutes
+    </h5>
+    <h5 class="card-subtitle text-body-secondary">
+      Maximum Marks : {{ questionpaper.examTotalMarks }}
+    </h5>
+  </div>
+</header>
+<div class="d-flex justify-content-center mt-5 align-items-center flex-wrap">
+  @for (qn of questionpaper.questions; track $index) {
+  <div class="quiz-container m-2" id="quiz">
+    <div class="quiz-header">
+      <div class="d-flex justify-content-evenly">
+        <h2 id="question">{{ qn.question }}</h2>
+        <p>{{ questionpaper.eachQuestionMarks }} Marks</p>
+      </div>
+      <ul>
+        <li>
+          <input
+            type="radio"
+            name="optionA"
+            id="a"
+            class="answer"
+            value="1"
+            (click)="submitAnswer(qn.id, $event)"
+          />
+          <label for="a" id="a_text"> {{ qn.optionA }}</label>
+        </li>
+        <li>
+          <input
+            type="radio"
+            name="optionB"
+            id="b"
+            class="answer"
+            value="2"
+            (click)="submitAnswer(qn.id, $event)"
+          />
+          <label for="b" id="b_text"> {{ qn.optionB }}</label>
+        </li>
+        <li>
+          <input
+            type="radio"
+            name="optionC"
+            id="c"
+            class="answer"
+            value="3"
+            (click)="submitAnswer(qn.id, $event)"
+          />
+          <label for="c" id="c_text"> {{ qn.optionC }}</label>
+        </li>
+        <li>
+          <input
+            type="radio"
+            name="optionD"
+            id="d"
+            class="answer"
+            value="4"
+            (click)="submitAnswer(qn.id, $event)"
+          />
+          <label for="d" id="d_text"> {{ qn.optionD }}</label>
+        </li>
+      </ul>
+    </div>
+  </div>
+  }
+  <div class="d-grid">
+    <button class="btn btn-success" (click)="submitPaper()">
+      Submit Paper
+    </button>
+  </div>
+</div>

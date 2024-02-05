@@ -1,0 +1,5 @@
+<div class="gallery">
+    @for (image of images; track $index) {
+        <img [src]="baseImageurl+image.filePath" alt="image">
+    }
+</div>

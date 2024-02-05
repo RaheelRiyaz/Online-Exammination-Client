@@ -1,0 +1,104 @@
+@if(!isResult){
+<div class="container">
+  <form #resultForm="ngForm" (ngSubmit)="viewResult()">
+    <ul>
+      <li>
+        <label for="name"
+          ><span
+            >Registration Number <span class="required-star">*</span></span
+          ></label
+        >
+        <input
+          type="text"
+          id="name"
+          name="registrationNumber"
+          placeholder="Registration Number"
+          required
+          [(ngModel)]="checkResult.registrationNumber"
+        />
+      </li>
+      <li class="mt-2">
+        <select
+          class="form-select"
+          aria-label="Default select example"
+          [(ngModel)]="checkResult.programId"
+          name="programId"
+        >
+          <option selected disabled value="">Choose Program</option>
+
+          @for (program of programs; track $index) {
+          <option value="{{ program.id }}">
+            {{ program.name }}
+          </option>
+          }
+        </select>
+      </li>
+      <li class="mt-2">
+        <select
+          class="form-select"
+          aria-label="Default select example"
+          name="semesterid"
+          [(ngModel)]="checkResult.semesterid"
+        >
+          <option selected disabled value="">Choose Semester</option>
+          @for (sem of semesters; track $index) {
+          <option value="{{ sem.id }}">
+            {{ sem.sem }}
+          </option>
+          }
+        </select>
+      </li>
+      <li>
+        <input type="submit" [disabled]="resultForm.invalid" />
+      </li>
+    </ul>
+  </form>
+</div>
+} @else {
+<head>
+  <title>Student Report Card</title>
+  <h2>Student Report Card</h2>
+</head>
+<body>
+  <table>
+    <thead>
+      <tr>
+        <td colspan="3">Course</td>
+        <td rowspan="2">Total Marks</td>
+        <td rowspan="2">Attempts</td>
+        <td colspan="2">Grade</td>
+      </tr>
+      <tr>
+        <td>Code</td>
+        <td colspan="2">Subject</td>
+        <td>Marks</td>
+        <td>Status</td>
+      </tr>
+    </thead>
+    <tbody>
+      @for (item of studentResults; track $index) {
+
+      <tr>
+        <td>CS 225</td>
+        <td colspan="2">{{ item.subjectName }}</td>
+        <td>{{ item.examTotalMarks }}</td>
+        <td>{{ item.marksObtained }}</td>
+        <td>{{ item.totalAttempts }}</td>
+        <td>{{ item.resultStatus === 1 ? "P" : "F" }}</td>
+      </tr>
+      }
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="4" class="footer">Total</td>
+        <td>15.0</td>
+        <td colspan="2">55.95</td>
+      </tr>
+      <tr>
+        <td colspan="4" class="footer">GPA</td>
+        <td colspan="3">3.73 / 4.0</td>
+      </tr>
+    </tfoot>
+  </table>
+</body>
+}

@@ -1,0 +1,131 @@
+<div class="card mb-3 m-auto mt-3" style="max-width: 80vw">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img
+        src="https://images.unsplash.com/photo-1606326608606-aa0b62935f2b?q=80&w=1740&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        class="img-fluid rounded-start"
+        alt="..."
+      />
+    </div>
+    <form #signupForm="ngForm" class="col-md-8" (ngSubmit)="signup()">
+      <div class="card-body">
+        <h5 class="card-title">Student Signup</h5>
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            name="name"
+            placeholder="Name"
+            [(ngModel)]="signupRequest.name"
+            required
+            #name="ngModel"
+            [class.is-invalid]="name.touched && name.invalid"
+          />
+          <label for="name">Name</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control"
+            id="Username"
+            name="userName"
+            placeholder="Username"
+            [(ngModel)]="signupRequest.userName"
+            #userName="ngModel"
+            [class.is-invalid]="userName.touched && userName.invalid"
+            required
+            (blur)="checkUserName(userName.value)"
+          />
+          <label for="Username">Username</label>
+        </div>
+        @if(isUserNameTaken){
+        <p class="text-danger">Username is already taken</p>
+        }
+
+        <div class="form-floating mb-3">
+          <input
+            type="email"
+            class="form-control"
+            id="floatingInput"
+            placeholder="name@example.com"
+            [(ngModel)]="signupRequest.email"
+            required
+            name="email"
+            #email="ngModel"
+            [class.is-invalid]="email.touched && email.invalid"
+          />
+          <label for="floatingInput">Email address</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="password"
+            class="form-control"
+            id="floatingPassword"
+            name="password"
+            placeholder="Password"
+            [(ngModel)]="signupRequest.password"
+            required
+            #password="ngModel"
+            [class.is-invalid]="password.touched && password.invalid"
+          />
+          <label for="floatingPassword">Password</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="tel"
+            class="form-control"
+            id="contactNo"
+            name="contactNo"
+            placeholder="Phone Number"
+            [(ngModel)]="signupRequest.contactNo"
+            required
+            #contactNo="ngModel"
+            [class.is-invalid]="contactNo.touched && contactNo.invalid"
+          />
+          <label for="contactNo">Contact Number</label>
+        </div>
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            class="form-control"
+            id="registrationNumber"
+            name="registrationNumber"
+            placeholder="RegistrationNumber"
+            [(ngModel)]="signupRequest.registrationNumber"
+            required
+            #registrationNumber="ngModel"
+            [class.is-invalid]="
+              registrationNumber.touched && registrationNumber.invalid
+            "
+          />
+          <label for="registrationNumber">Registration Number</label>
+        </div>
+
+        <select
+          class="form-select"
+          aria-label="Default select example"
+          [(ngModel)]="signupRequest.gender"
+          required
+          #gender="ngModel"
+          name="gender"
+          [class.is-invalid]="gender.touched && gender.invalid"
+        >
+          <option selected [ngValue]="0">Select Gender</option>
+          <option [ngValue]="1">Male</option>
+          <option [ngValue]="2">Female</option>
+        </select>
+
+        <div class="d-grid mt-3">
+          <button class="btn btn-success" [disabled]="signupForm.invalid ||signupForm.valid && isUserNameTaken">
+            Signup
+          </button>
+          <p>
+            Already have an account ?
+            <span class="pointer" [routerLink]="['/login']">Login</span>
+          </p>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

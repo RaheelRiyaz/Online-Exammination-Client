@@ -1,0 +1,59 @@
+<button class="btn btn-primary mb-3 ms-2" (click)="uploadImages()">Add Images +</button>
+
+<div class="container">
+  <div class="row">
+    <div class="row">
+      @for (image of images; track $index) {
+      <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+        <img
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+          class="img-thumbnail"
+          alt="Another alt text"
+          [src]="baseImageUrl + image.filePath"
+          #Img
+          (click)="showFullImage($index)"
+        />
+      </div>
+      }
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content" style="width: 705px; height: 82vh">
+      <div class="modal-header">
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <img class="imageviewer" [src]="imageViewerSrc" alt="image" />
+        <div
+          class="footer m-auto d-flex justify-content center align-items center"
+          style="width: 20px"
+        >
+          <i
+            class="fa-2x fa-solid fa-arrow-left me-3 pointer"
+            (click)="showPreviousImage()"
+          ></i>
+          <i
+            class="fa-2x fa-solid fa-arrow-right ms-3 pointer"
+            (click)="showNextImage()"
+          ></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
